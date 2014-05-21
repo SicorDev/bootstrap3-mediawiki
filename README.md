@@ -150,7 +150,7 @@ Usage:
 
 ## Notes for further adaption
 
-* Glyphicons and relative paths
+* **Glyphicons and relative paths**
 
 	Using the MediaWiki ResourceLoade will break realative pathnames in css and javascript
 	files. Therefore glyphicons won't work when using Bootstrap in MediaWiki.
@@ -158,3 +158,16 @@ Usage:
 	Glyphicon font with an inline style that points to the correct skin folder.
 	This should work in most cases, but you should be aware of this before further
 	editing the skin.
+
+* **Google Code Prettify**
+
+	Google Code Prettify was removed to have one less dependency and leave the
+	choice which syntax highlighter to use to the user. To integrate it back into
+	your wiki have a look at [Extension:GoogeCodePrettify](http://www.mediawiki.org/wiki/Extension:GoogleCodePrettify).
+
+* **behave.js**
+
+	Behave.js adds tabstops for multiple lines, automatic completion for brackets
+	and more to the default edit textarea. It was tested in cinjunction with
+	[Extension:WikiEditor](http://www.mediawiki.org/wiki/Extension:WikiEditor) and
+	seems to work well.

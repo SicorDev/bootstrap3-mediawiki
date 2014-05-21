@@ -38,7 +38,8 @@ Once you've enabled the skin, you'll want to create a few pages.
 
 ### Skin options
 You can customize the skin by setting any of these options in your
-`LocalSettings.php`.
+`LocalSettings.php`. Note that these settings have to be made *before* you require
+the `bootstrap3-mediawiki.php`.
 
 * **$wgTOCLocation**
 
@@ -46,10 +47,41 @@ You can customize the skin by setting any of these options in your
 
 * **$wgBsTheme**
 
-	Use `$wgBsTheme = 'themename'` to use one of the included Bootstrap themes from http://bootswatch.com. Set this to the theme you would like to use. Note that you have to set this option *before* you require the `bootstrap3-mediawiki.php`.
+	Use `$wgBsTheme = 'themename'` to use one of the included Bootstrap themes from http://bootswatch.com.
+	Set this to the theme you would like to use.
+
+	To use an other Bootstrap 3 theme, name the file `yourthemename.min.css` and
+	place it in the `bootstrap3-mediawiki/css/bootswatch` folder. Then set `$wgBsTheme = 'yourthemename'`.
+
+* **$wgSiteCSS**
+
+	You can add your own custom CSS styles to the skin by setting `$wgSiteCSS = 'custom.css'` and
+	adding the styles to `bootstrap3-mediawiki/css/custom.css`.
+
+* **$wgSiteJS**
+
+	You can add your own custom JavaScript to the skin by setting `$wgSiteJS = 'custom.js'` and
+	adding the scripts to `bootstrap3-mediawiki/js/custom.js`.
+
+* **$wgSitenameshort**
+
+	If you want a shorter title to appear in your navbar, you can set
+	`$wgSitenameshort = 'Short Name';`.
+
+Here is what an example `LocalSettings.php` might look:
+
+	$wgBsTheme = 'yeti';
+	$wgTOCLocation = 'sidebar';
+	$wgSitenameshort = 'MyWiki';
+	$wgSiteCSS = 'custom.css';
+	$wgSiteJS = 'custom.js';
+	require_once "$IP/skins/bootstrap3-mediawiki/bootstrap3-mediawiki.php";
+
 
 ### Create: Bootstrap:Footer
-This MediaWiki page will contain what appears in your footer. You can use whatever bootstrap styles you would like. See the [official documentation](http://www.getbootstrap.com) for more details.
+This MediaWiki page will contain what appears in your footer. You can use most of the
+bootstrap styles. See the [official documentation](http://getbootstrap.com/components/)
+for more details.
 
 Here is an example for a footer with two columns of equal with, using the Bootstrap grid sytem:
 
@@ -116,17 +148,13 @@ Usage:
 
 	{{pop|Whatever triggers the popover|Popover Title|Popover Content}}
 
-### Short Title
-If you want a shorter title to appear in your navbar, you can add <code>$wgSitenameshort = 'Short Name';</code> to your LocalSettings.php file.
-
-### Custom CSS
-If you want a custom CSS file for overrides or site-specific features,
-you can declare <code>$wgSiteCSS = 'bootstrap-mediawiki/custom.css'</code>
-
-### Custom JS
-If you want a custom JS file for overrides or site-specific features,
-you can declare <code>$wgSiteJS = 'bootstrap-mediawiki/custom.js'</code>
-
 ## Notes for further adaption
 
 * Glyphicons and relative paths
+
+	Using the MediaWiki ResourceLoade will break realative pathnames in css and javascript
+	files. Therefore glyphicons won't work when using Bootstrap in MediaWiki.
+	To circumvent this, the skin overrides the `@font-face` definition of the
+	Glyphicon font with an inline style that points to the correct skin folder.
+	This should work in most cases, but you should be aware of this before further
+	editing the skin.

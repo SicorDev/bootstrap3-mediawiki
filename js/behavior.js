@@ -1,10 +1,26 @@
 $(function() {
 	$('html').removeClass('client-nojs');
 
+	// Check if edit page
+	if( $('#wpTextbox1') ) {
+		// Enable behave.js for WikiEditor
+		// (might collide with the new WikiEditor extension in the future)
+		new Behave({
+				textarea: document.getElementById('wpTextbox1')
+		});
+
+		// Styling of edit page
+		$('.editButtons').addClass('well');
+		$('input[type=submit],input[type=button],input[type=reset]').addClass('btn');
+		$('input[type=submit]').addClass('btn-primary');
+		$('input[name=wpSave]').removeClass('btn-primary').addClass('btn-success');
+		$('span.cancelLink a').addClass('btn btn-warning');
+	}
+
 	$('#page-contents a').click(function(e){
 		e.preventDefault();
 		var $target = $(this).attr('href');
-		$(document).scrollTop( $($target).offset().top-100 );                                                                                                                                                                                                     
+		$(document).scrollTop( $($target).offset().top-100 );
 	});
 
 	$( document ).on('change', '#subnav-select', function() {
@@ -29,12 +45,6 @@ $(function() {
 			}//end if
 		});
 
-	$('pre').addClass('prettyprint linenums');
-	$('.hero-unit pre').removeClass('prettyprint linenums');
-
-	$('.editButtons').addClass('well');
-	$('input[type=submit],input[type=button],input[type=reset]').addClass('btn');
-	$('input[type=submit]').addClass('btn-primary');
 
 	$('input[type=checkbox],input[type=radio]').each(function() {
 		var $el = $(this);
@@ -55,15 +65,15 @@ $(function() {
 	if ( $('.toc-sidebar').length > 0 ) {
 		if ( 0 === $('#toc').length ) {
 			$('.toc-sidebar').remove();
-			$('.wiki-body-section').removeClass('span9').addClass('span12');
+			$('.wiki-body-section').removeClass('col-md-9').addClass('col-md-12');
 		} else {
-			$('.toc-sidebar').append('<h3>Contents</h3>');
-			$('#toc').each(function() {
-				$(this).find('ul:first').appendTo( '.toc-sidebar' );
-				$(this).remove();
-			});
-
+			$('.toc-sidebar').append('<h3>Inhalt</h3>');
+			$('#toc').find('ul:first').appendTo('.toc-sidebar');
+			$('#toc').remove();
 			$('.toc-sidebar').attr('id', 'toc');
+
+			//$('.toc-sidebar ul').addClass('list-group');
+			//$('.toc-sidebar ul li').addClass('list-group-item');
 		}//end else
 	} else {
 		$('#toc').each(function() {
@@ -71,17 +81,18 @@ $(function() {
 			var $title = $toc.find('#toctitle');
 			var $links = $title.siblings('ul');
 
-			$('.page-header').prepend('<ul class="nav nav-pills pull-right"><li class="dropdown" id="page-contents"><a class="dropdown-toggle" href="#"><i class="icon-list"></i> Contents <b class="caret"></b></a> <ul class="dropdown-menu"></ul></li></ul>');
-
-			$('.page-header #page-contents').find('.dropdown-menu').html( $links.html() );
+			//$('.page-header').prepend('<ul class="nav nav-pills pull-right"><li class="dropdown dropdown-menu-right" id="page-contents"><a class="dropdown-toggle" href="#"><i class="icon-list"></i> Contents <b class="caret"></b></a> <ul class="dropdown-menu"></ul></li></ul>');
+			$('.page-header').prepend('<div class="dropdown pull-right toc-dropdown"><button class="btn dropdown-toggle" type="button" data-toggle="dropdown" href="#"><span class="glyphicon glyphicon-list"></span> Inhalt <span class="caret"></span></button><ul class="dropdown-menu" role="menu"></ul></div>');
+			$('.page-header .toc-dropdown').find('.dropdown-menu').html( $links.html() );
+			$('#toc').hide();
 		});
 
-		if( $('.page-header .nav').length === 0 ) {
-			$('.page-header').prepend('<ul class="nav nav-pills pull-right"></li></ul>');
+		if( $('.page-header .toc-dropdown').length === 0 ) {
+			$('.page-header').prepend('<ul class="pull-right toc-dropdown"><li></li></ul>');
 		}//end if
 
 		var $header = $('.page-header');
-		var $hero = $('.hero-unit');
+		var $hero = $('.jumbotron');
 		var $edit = $('.navbar .content-actions .edit');
 		if( $edit.length > 0 ) {
 			if( $hero.length ) {
@@ -92,11 +103,9 @@ $(function() {
 				$edit.closest('li').clone().prependTo( $hero.find('.nav-pills') );
 			} else {
 				$edit.closest('li').clone().prependTo( $header.find('.nav-pills') );
-			}//end else
+			}//end if .. else
 		}//end if
-	}//end if
-
-	prettyPrint();
+	}//end if .. else
 
 	$('#wiki-body .body a[title="Special:UserLogin"]').click();
 	$('.dropdown-toggle').dropdown();

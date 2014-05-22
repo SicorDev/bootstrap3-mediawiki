@@ -57,9 +57,9 @@ $wgResourceModules['skins.bootstrap3mediawiki'] = array(
 );
 
 if ( isset( $wgSiteJS ) ) {
-	$wgResourceModules['skins.bootstrap3mediawiki']['scripts'][] = $skinDir . '/' . $wgSiteJS;
+	$wgResourceModules['skins.bootstrap3mediawiki']['scripts'][] = $skinDir . '/js/' . $wgSiteJS;
 }//end if
 
 if ( isset( $wgSiteCSS ) ) {
-	$wgResourceModules['skins.bootstrap3mediawiki']['styles'][] = $skinDir . '/' . $wgSiteCSS;
+	$wgResourceModules['skins.bootstrap3mediawiki']['styles'][] = $skinDir . '/css/' . $wgSiteCSS;
 }//end if

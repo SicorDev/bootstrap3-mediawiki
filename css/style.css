@@ -1,10 +1,5 @@
 body {
-	background-color: #fff;
-	background-image: url(skins/bootstrap3-mediawiki/images/wiki-bg.jpg);
-	background-repeat: repeat-x;
-	background-position: center 50px;
 	color: #222;
-	padding-top: 50px;
 }
 
 body.page-Main_Page .page-header,
@@ -14,6 +9,11 @@ body.page-Category_HTML .page-header,
 body.page-Category_PHP .page-header,
 body.page-Category_PL_SQL .page-header,
 body.page-Category_CSS .page-header { display: none; }
+
+
+#wiki-outer-body {
+		padding-top: 50px;
+}
 
 textarea {
 	width: 95%;
@@ -223,19 +223,17 @@ a.new {
 	border-left: none;
 }
 
-.bottom {
-	background: #f5f5f5;
-	margin-top: 1em;
+.footer {
 	padding-bottom: 2em;
 	padding-top: 2em;
 }
 
-.bottom .mw-editsection {
+.footer .mw-editsection {
 	display: none;
 }
 
-.bottom footer {
-	color: #999;
+.footer .container {
+	/*color: #999;*/
 	margin-top: 2em;
 }
 
@@ -327,10 +325,10 @@ img.thumbborder {
 		padding-right: 0;
 	}
 
-	.bottom,
+	.footer,
 	#wiki-outer-body {
-		padding-left: 20px;
-		padding-right: 20px;
+		padding-left: 0px;
+		padding-right: 0px;
 	}
 
 	.navbar {
@@ -411,10 +409,6 @@ img.thumbborder {
 
 pre.linenums ol {
 	margin-bottom: 0;
-}
-
-#wiki-outer-body {
-	/*background: url(images/body-bg.png) center top repeat-y;*/
 }
 
 /* Fixed subnav on scroll, but only for 980px and up (sorry IE!) */

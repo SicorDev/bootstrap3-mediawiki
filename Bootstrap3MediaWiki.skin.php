@@ -207,7 +207,7 @@ class Bootstrap3MediaWikiTemplate extends QuickTemplate {
 				<?php endif; ?>
 			</div><!-- container -->
 		</div>
-		<div class="bottom">
+		<div class="footer navbar-default">
 			<div class="container">
 				<?php $this->includePage('Bootstrap:Footer'); ?>
 				<!--<footer>

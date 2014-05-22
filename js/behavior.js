@@ -1,18 +1,22 @@
 $(function() {
-	$('html').removeClass('client-nojs');
+	// Some general styling of elements
 
-	// Check if edit page
+	// Buttons
+	$('input[type=submit],input[type=button],input[type=reset]').addClass('btn btn-default');
+	$('input[type=submit]').addClass('btn-primary').removeClass('btn-default');
+	$('button[type=submit],button[type=button],button[type=reset]').addClass('btn btn-default');
+	$('button[type=submit]').addClass('btn-primary').removeClass('btn-default');
+
+	// Check if the edit page form is present
 	if( $('#wpTextbox1') ) {
-		// Enable behave.js for WikiEditor
+		// Enable behave.js for wiki editor
 		// (might collide with the new WikiEditor extension in the future)
 		new Behave({
 				textarea: document.getElementById('wpTextbox1')
 		});
 
-		// Styling of edit page
+		// Add some styles to the editor elements
 		$('.editButtons').addClass('well');
-		$('input[type=submit],input[type=button],input[type=reset]').addClass('btn');
-		$('input[type=submit]').addClass('btn-primary');
 		$('input[name=wpSave]').removeClass('btn-primary').addClass('btn-success');
 		$('span.cancelLink a').addClass('btn btn-warning');
 	}
@@ -21,10 +25,6 @@ $(function() {
 		e.preventDefault();
 		var $target = $(this).attr('href');
 		$(document).scrollTop( $($target).offset().top-100 );
-	});
-
-	$( document ).on('change', '#subnav-select', function() {
-		window.location = $(this).val();
 	});
 
 	$('table')
@@ -46,6 +46,7 @@ $(function() {
 		});
 
 
+	// Add labels to checkboxes and radio buttons
 	$('input[type=checkbox],input[type=radio]').each(function() {
 		var $el = $(this);
 
@@ -59,9 +60,12 @@ $(function() {
 		$el.closest('label').addClass($el.attr('type'));
 	});
 
+	// Init tooltips and popovers
 	$('.tip').tooltip();
 	$('.pop').popover();
+	$('.dropdown-toggle').dropdown();
 
+	// Move and prepare table of contents
 	if ( $('.toc-sidebar').length > 0 ) {
 		if ( 0 === $('#toc').length ) {
 			$('.toc-sidebar').remove();
@@ -90,23 +94,7 @@ $(function() {
 		if( $('.page-header .toc-dropdown').length === 0 ) {
 			$('.page-header').prepend('<ul class="pull-right toc-dropdown"><li></li></ul>');
 		}//end if
-
-		var $header = $('.page-header');
-		var $hero = $('.jumbotron');
-		var $edit = $('.navbar .content-actions .edit');
-		if( $edit.length > 0 ) {
-			if( $hero.length ) {
-				if( ! $hero.find('.nav-pills').length ) {
-					$hero.prepend('<ul class="nav nav-pills pull-right"></ul>');
-				}//end if
-
-				$edit.closest('li').clone().prependTo( $hero.find('.nav-pills') );
-			} else {
-				$edit.closest('li').clone().prependTo( $header.find('.nav-pills') );
-			}//end if .. else
-		}//end if
 	}//end if .. else
 
 	$('#wiki-body .body a[title="Special:UserLogin"]').click();
-	$('.dropdown-toggle').dropdown();
 });

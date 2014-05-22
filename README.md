@@ -13,6 +13,7 @@ The framework gives a boatload of features that play really nicely with a MediaW
 * Removed [FontAwesome](http://fortawesome.github.io/Font-Awesome/) (use [Bootstrap Glyphicons](http://getbootstrap.com/components/#glyphicons) instead)
 	* Fix for Glyphicons in MediaWiki
 * Added [Behave.js](http://jakiestfu.github.io/Behave.js/) support
+* Added support for german wikis
 
 ## Installation
 First, clone the repository into your `skins/` directory.
@@ -48,7 +49,9 @@ the `bootstrap3-mediawiki.php`.
 * **$wgBsTheme**
 
 	Use `$wgBsTheme = 'themename'` to use one of the included Bootstrap themes from http://bootswatch.com.
-	Set this to the theme you would like to use.
+	Set this to the theme you would like to use. Note that the darker themes do not
+	work very well with this skin and need to be further tweaked by adding custom
+	CSS styles.
 
 	To use an other Bootstrap 3 theme, name the file `yourthemename.min.css` and
 	place it in the `bootstrap3-mediawiki/css/bootswatch` folder. Then set `$wgBsTheme = 'yourthemename'`.
@@ -171,3 +174,11 @@ Usage:
 	and more to the default edit textarea. It was tested in cinjunction with
 	[Extension:WikiEditor](http://www.mediawiki.org/wiki/Extension:WikiEditor) and
 	seems to work well.
+
+## ToDo
+
+* More consistent use of HTML 5
+* Better accessibility (e.g. use 'role' attributes)
+* Better responsiveness
+* Better integration of SMW
+* Cleanup *behavior.js* and *style.css*

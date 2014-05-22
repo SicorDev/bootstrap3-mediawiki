@@ -74,12 +74,14 @@ the `bootstrap3-mediawiki.php`.
 
 Here is what an example `LocalSettings.php` might look:
 
-	$wgBsTheme = 'yeti';
-	$wgTOCLocation = 'sidebar';
-	$wgSitenameshort = 'MyWiki';
-	$wgSiteCSS = 'custom.css';
-	$wgSiteJS = 'custom.js';
-	require_once "$IP/skins/bootstrap3-mediawiki/bootstrap3-mediawiki.php";
+````php
+$wgBsTheme = 'yeti';
+$wgTOCLocation = 'sidebar';
+$wgSitenameshort = 'MyWiki';
+$wgSiteCSS = 'custom.css';
+$wgSiteJS = 'custom.js';
+require_once "$IP/skins/bootstrap3-mediawiki/bootstrap3-mediawiki.php";
+````
 
 
 ### Create: Bootstrap:Footer

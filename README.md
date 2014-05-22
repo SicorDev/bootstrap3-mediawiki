@@ -18,13 +18,13 @@ The framework gives a boatload of features that play really nicely with a MediaW
 ## Installation
 First, clone the repository into your `skins/` directory.
 
-````bash
+````shell
 git clone https://github.com/jneug/bootstrap3-mediawiki.git
 ````
 
 Next, in `LocalSettings.php` set:
 
-````perl
+````php
 $wgDefaultSkin = 'bootstrap3mediawiki';
 ````
 

@@ -210,11 +210,17 @@ class Bootstrap3MediaWikiTemplate extends QuickTemplate {
 		<div class="footer navbar-default">
 			<div class="container">
 				<?php $this->includePage('Bootstrap:Footer'); ?>
-				<!--<footer>
-					<p>&copy; <?php echo date('Y'); ?> by <a href="<?php echo (isset($wgCopyrightLink) ? $wgCopyrightLink : 'http://borkweb.com'); ?>"><?php echo (isset($wgCopyright) ? $wgCopyright : 'BorkWeb'); ?></a>
-						&bull; Powered by <a href="http://mediawiki.org">MediaWiki</a>
-					</p>
-				</footer>-->
+        <?php if( isset($wgCopyright) ) : ?>
+				<div class="copyright">
+					<p>&copy; <?php echo date('Y'); ?> by
+            <?php if(isset($wgCopyrightLink)) : ?>
+            <a href="<?php echo $wgCopyrightLink; ?>"><?php echo $wgCopyright; ?></a>
+          <? else : ?>
+            <?php echo $wgCopyright; ?>
+            <?php endif; ?>
+						&bull; Powered by <a href="http://mediawiki.org">MediaWiki</a></p>
+				</div>
+      <?php endif; ?>
 			</div><!-- container -->
 		</div><!-- bottom -->
 

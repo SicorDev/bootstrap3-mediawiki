@@ -18,13 +18,13 @@ The framework gives a boatload of features that play really nicely with a MediaW
 ## Installation
 First, clone the repository into your `skins/` directory.
 
-````
+````bash
 git clone https://github.com/jneug/bootstrap3-mediawiki.git
 ````
 
 Next, in `LocalSettings.php` set:
 
-````php
+````perl
 $wgDefaultSkin = 'bootstrap3mediawiki';
 ````
 
@@ -51,7 +51,8 @@ the `bootstrap3-mediawiki.php`.
 	Use `$wgBsTheme = 'themename'` to use one of the included Bootstrap themes from http://bootswatch.com.
 	Set this to the theme you would like to use. Note that the darker themes do not
 	work very well with this skin and need to be further tweaked by adding custom
-	CSS styles.
+	CSS styles. The skin was developed with the *yeti* theme in mind, so the `custom.css`
+	contains some styles to tweak the theme for use with this skin.
 
 	To use an other Bootstrap 3 theme, name the file `yourthemename.min.css` and
 	place it in the `bootstrap3-mediawiki/css/bootswatch` folder. Then set `$wgBsTheme = 'yourthemename'`.

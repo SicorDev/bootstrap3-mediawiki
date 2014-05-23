@@ -5,6 +5,15 @@
     background-position: center top;
 }
 
-.footer .copyright {
+footer, .footer {
   color: #F5F5F5;
+}
+
+footer .panel, .footer .panel {
+  color: #333;
+}
+
+blockquote {
+  font-size: 100%;
+  font-style: italic;
 }

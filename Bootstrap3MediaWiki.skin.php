@@ -226,7 +226,7 @@ class Bootstrap3MediaWikiTemplate extends QuickTemplate {
             foreach( $footerIconCategory as $footerIcon ) {
 
             echo
-              (isset($footerIcon[url]) ? '<a href="'.$footerIcon[alt].'">' : '') .
+              (isset($footerIcon[url]) ? '<a href="'.$footerIcon[url].'">' : '') .
               '<img src="' . $footerIcon[src] . '" ' .
               (isset($footerIcon[alt]) ? 'alt="'.$footerIcon[alt].'" ' : '') .
               (isset($footerIcon[height]) ? 'height="'.$footerIcon[height].'" ' : '') .

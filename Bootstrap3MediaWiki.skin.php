@@ -246,9 +246,10 @@ class Bootstrap3MediaWikiTemplate extends QuickTemplate {
           <? else : ?>
             <?php echo $wgCopyright; ?>
             <?php endif; ?>
-						&bull; Powered by <a href="http://mediawiki.org">MediaWiki</a></p>
+						<!-- &bull; Powered by <a href="http://mediawiki.org">MediaWiki</a>-->
+          </p>
 				</div>
-      <?php endif; ?>
+        <?php endif; ?>
 			</div><!-- container -->
 		</footer><!-- footer -->
 

@@ -36,6 +36,12 @@ class SkinBootstrap3MediaWiki extends SkinTemplate {
 
 		$out->addMeta( 'X-UA-Compatible', 'IE=edge' );
     $out->addMeta( 'viewport', 'width=device-width, initial-scale=1, maximum-scale=1' );
+
+    $out->addScript( '
+<!--[if lt IE 9]>
+<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->' );
 	}//end initPage
 
 	/**
@@ -74,7 +80,7 @@ class Bootstrap3MediaWikiTemplate extends QuickTemplate {
 	public function execute() {
 		global $wgRequest, $wgUser, $wgSitename, $wgSitenameshort, $wgCopyrightLink, $wgCopyright, $wgBootstrap, $wgArticlePath, $wgGoogleAnalyticsID, $wgSiteCSS;
 		global $wgEnableUploads;
-		global $wgLogo;
+		global $wgLogo, $wgFooterIcons;
 		global $wgTOCLocation;
 
 		$this->skin = $this->data['skin'];
@@ -86,16 +92,18 @@ class Bootstrap3MediaWikiTemplate extends QuickTemplate {
 
 		$this->html('headelement');
 		?>
+    <!-- link to content for accessibility -->
+    <a href="#wiki-body" class="sr-only">Skip to main content</a>
 		<nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
-  			<div class="navbar-header">
+  			<header class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
           <a class="navbar-brand" href="<?php echo $this->data['nav_urls']['mainpage']['href'] ?>" title="<?php echo $wgSitename ?>"><?php echo isset( $wgLogo ) && $wgLogo ? "<img src='{$wgLogo}' alt='Logo'/> " : ''; echo $wgSitenameshort ?: $wgSitename; ?></a>
-        </div>
+        </header>
 
         <div class="navbar-collapse collapse">
           <div class="navbar-header navbar-right">
@@ -157,59 +165,79 @@ class Bootstrap3MediaWikiTemplate extends QuickTemplate {
       </div><!-- /.container -->
 		</nav>
 
-		<div id="wiki-outer-body">
+		<main id="wiki-outer-body">
 			<div id="wiki-body" class="container">
 				<?php
 					if ( 'sidebar' == $wgTOCLocation ) {
 						?>
 						<div class="row">
-							<div class="col-md-3 hidden-print toc-sidebar"></div>
-							<div class="col-md-9 wiki-body-section">
+							<aside class="col-md-3 hidden-print toc-sidebar"></aside>
+							<section class="col-md-9 wiki-body-section">
 						<?php
 					}//end if
 				?>
-				<?php if( $this->data['sitenotice'] ) { ?><div id="siteNotice" class="alert alert-warning"><?php $this->html('sitenotice') ?></div><?php } ?>
-				<?php if ( $this->data['undelete'] ): ?>
-				<!-- undelete -->
-				<div id="contentSub2"><?php $this->html( 'undelete' ) ?></div>
-				<!-- /undelete -->
-				<?php endif; ?>
-				<?php if($this->data['newtalk'] ): ?>
-				<!-- newtalk -->
-				<div class="usermessage"><?php $this->html( 'newtalk' )  ?></div>
-				<!-- /newtalk -->
-				<?php endif; ?>
+  				<?php if( $this->data['sitenotice'] ) { ?><div id="siteNotice" class="alert alert-warning"><?php $this->html('sitenotice') ?></div><?php } ?>
+  				<?php if ( $this->data['undelete'] ): ?>
+  				<!-- undelete -->
+  				<div id="contentSub2"><?php $this->html( 'undelete' ) ?></div>
+  				<!-- /undelete -->
+  				<?php endif; ?>
+  				<?php if($this->data['newtalk'] ): ?>
+  				<!-- newtalk -->
+  				<div class="usermessage"><?php $this->html( 'newtalk' )  ?></div>
+  				<!-- /newtalk -->
+  				<?php endif; ?>
 
-				<div class="pagetitle page-header">
-					<h1><?php $this->html( 'title' ) ?> <small><?php $this->html('subtitle') ?></small></h1>
-				</div>
+  				<div class="pagetitle page-header">
+  					<h1><?php $this->html( 'title' ) ?> <small><?php $this->html('subtitle') ?></small></h1>
+  				</div>
 
-				<div class="body">
-				<?php $this->html( 'bodytext' ) ?>
-				</div>
+  				<article class="body">
+  				<?php $this->html( 'bodytext' ) ?>
+          </article>
 
-				<?php if ( $this->data['catlinks'] ): ?>
-				<div class="category-links">
-				<!-- catlinks -->
-				<?php $this->html( 'catlinks' ); ?>
-				<!-- /catlinks -->
-				</div>
-				<?php endif; ?>
-				<?php if ( $this->data['dataAfterContent'] ): ?>
-				<div class="data-after-content">
-				<!-- dataAfterContent -->
-				<?php $this->html( 'dataAfterContent' ); ?>
-				<!-- /dataAfterContent -->
-				</div>
-				<?php endif; ?>
-				<?php if ( 'sidebar' == $wgTOCLocation ): ?>
-        </div> <!-- /.wiki-body-section -->
+  				<?php if ( $this->data['catlinks'] ): ?>
+  				<div class="category-links">
+  				<!-- catlinks -->
+  				<?php $this->html( 'catlinks' ); ?>
+  				<!-- /catlinks -->
+  				</div>
+  				<?php endif; ?>
+  				<?php if ( $this->data['dataAfterContent'] ): ?>
+  				<div class="data-after-content">
+  				<!-- dataAfterContent -->
+  				<?php $this->html( 'dataAfterContent' ); ?>
+  				<!-- /dataAfterContent -->
+  				</div>
+  				<?php endif; ?>
+  				<?php if ( 'sidebar' == $wgTOCLocation ): ?>
+        </section> <!-- /.wiki-body-section -->
 				<?php endif; ?>
 			</div><!-- container -->
-		</div>
-		<div class="footer navbar-default">
+		</main>
+		<footer class="footer navbar-default">
 			<div class="container">
 				<?php $this->includePage('Bootstrap:Footer'); ?>
+
+        <?php if( count($wgFooterIcons) > 0 ) : ?>
+        <div class="pull-right">
+          <?php
+          foreach( $wgFooterIcons as $footerIconCategory ) {
+            foreach( $footerIconCategory as $footerIcon ) {
+
+            echo
+              (isset($footerIcon[url]) ? '<a href="'.$footerIcon[alt].'">' : '') .
+              '<img src="' . $footerIcon[src] . '" ' .
+              (isset($footerIcon[alt]) ? 'alt="'.$footerIcon[alt].'" ' : '') .
+              (isset($footerIcon[height]) ? 'height="'.$footerIcon[height].'" ' : '') .
+              (isset($footerIcon[width]) ? 'height="'.$footerIcon[width].'" ' : '') . '/>' .
+              (isset($footerIcon[url]) ? '</a>' : '');
+            }
+          }
+          ?>
+        </div>
+        <?php endif; ?>
+
         <?php if( isset($wgCopyright) ) : ?>
 				<div class="copyright">
 					<p>&copy; <?php echo date('Y'); ?> by
@@ -222,7 +250,7 @@ class Bootstrap3MediaWikiTemplate extends QuickTemplate {
 				</div>
       <?php endif; ?>
 			</div><!-- container -->
-		</div><!-- bottom -->
+		</footer><!-- footer -->
 
 		<?php
 		$this->html('bottomscripts'); /* JS call to runBodyOnloadHook */

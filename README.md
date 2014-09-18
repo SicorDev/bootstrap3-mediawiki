@@ -123,17 +123,26 @@ Every list item on the first level will be displayed as a menu item in the navba
 Aside from links you can add dividers to the dropdowns by adding `** ----` and subheading as normal text items, e.g. `** Some text`.
 Additionally each menu item may have a [glyphicon](http://getbootstrap.com/components/#glyphicons) by adding `(icon:name)` to the end of the line. (The icon names are the last part in the class names: *.glyphicon-**name***)
 
-### Create: Template:Alert
-This template is used to leverage Bootstrap's alert box:
+### Create: Template:Panel
+Use this template to easily generate panels on your pages.
 
-	<div class="alert {{{2}}}">{{{1}}}</div>
+	<div class="panel panel-{{{3|default}}}"><div class="panel-heading"><span class="panel-title">{{{1}}}</span></div><div class="panel-body">{{{2}}}</div></div>
 
 Usage:
 
-	{{alert|Message you want to say|alert-danger}}
+	{{panel|Panel Title|Panel Content|primary}}
+
+### Create: Template:Alert
+This template is used to leverage Bootstrap's alert box:
+
+	<div class="alert alert-{{{2}}}">{{{1}}}</div>
+
+Usage:
+
+	{{alert|Message you want to say|danger}}
 
 ### Create: Template:Tip
-This template is used to do Bootstrap tooltips!
+This template is used to do Bootstrap tooltips.
 
 	<span title="{{{2}}}" class="tip" rel="tooltip">{{{1}}}</span>
 
@@ -146,13 +155,33 @@ Usage:
 	{{tip|[[Bacon]]|Delicious snack}}
 
 ### Create: Template:Pop
-This template is used to do Bootstrap popovers!
+This template is used to do Bootstrap popovers.
 
 	<span data-original-title="{{{2}}}" data-content="{{{3}}}" class="pop">{{{1}}}</span>
 
 Usage:
 
 	{{pop|Whatever triggers the popover|Popover Title|Popover Content}}
+
+### Create: Template:Jumbotron
+YOu probably don't want to use too many Jumbotrons throughout your Wiki and then
+this template might not be necessary. Just use the Jumbotron syntax directly on
+the page.
+
+	<div class="jumbotron">= {{{1}}} = {{{2}}}<div class="btn btn-primary btn-lg" role="button">{{{3}}}</div></div>
+
+Usage:
+
+	{{jumbotron|My large header|My Jumbotron text|My button label}}
+
+### Create: Template:Icon
+This template is useful if you want to use Glyphicons on your pages.
+
+	<span class="glyphicon glyphicon-{{{1}}}"></span>
+
+Usage:
+
+	{{icon|pencil}}
 
 ## Notes for further adaption
 
@@ -185,3 +214,4 @@ Usage:
 * Better responsiveness
 * Better integration of SMW
 * Cleanup *behavior.js* and *style.css*
+* Optionally include FontAwesome for more icons

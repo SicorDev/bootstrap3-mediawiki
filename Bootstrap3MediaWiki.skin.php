@@ -48,13 +48,13 @@ class SkinBootstrap3MediaWiki extends SkinTemplate {
 	 * prepares the skin's CSS
 	 */
 	public function setupSkinUserCss( OutputPage $out ) {
-		global $wgSiteCSS, $wgStylePath;
+		global $wgSiteCSS, $wgStylePath, $wgServer;
 
 		parent::setupSkinUserCss( $out );
 
 		$out->addModuleStyles( 'skins.bootstrap3mediawiki' );
 
-    $fontPath = '.' . $wgStylePath . '/' . $this->skinname . BOOTSTRAP_DIR;
+    $fontPath = /*$wgServer .*/ $wgStylePath . '/' . $this->skinname . BOOTSTRAP_DIR;
     $out->addInlineStyle( str_replace("{{1}}", $fontPath, "@font-face{font-family:'Glyphicons Halflings';src:url({{1}}/fonts/glyphicons-halflings-regular.eot);src:url({{1}}/fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'),url({{1}}/fonts/glyphicons-halflings-regular.woff) format('woff'),url({{1}}/fonts/glyphicons-halflings-regular.ttf) format('truetype'),url({{1}}/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg')}") );
 	}//end setupSkinUserCss
 }

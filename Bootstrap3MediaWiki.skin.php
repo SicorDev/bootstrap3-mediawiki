@@ -35,9 +35,9 @@ class SkinBootstrap3MediaWiki extends SkinTemplate {
 		$out->addModuleScripts( 'skins.bootstrap3mediawiki' );
 
 		$out->addMeta( 'X-UA-Compatible', 'IE=edge' );
-    $out->addMeta( 'viewport', 'width=device-width, initial-scale=1, maximum-scale=1' );
+    	$out->addMeta( 'viewport', 'width=device-width, initial-scale=1, maximum-scale=1' );
 
-    $out->addScript( '
+    	$out->addScript( '
 <!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
@@ -54,8 +54,8 @@ class SkinBootstrap3MediaWiki extends SkinTemplate {
 
 		$out->addModuleStyles( 'skins.bootstrap3mediawiki' );
 
-    $fontPath = /*$wgServer .*/ $wgStylePath . '/' . $this->skinname . BOOTSTRAP_DIR;
-    $out->addInlineStyle( str_replace("{{1}}", $fontPath, "@font-face{font-family:'Glyphicons Halflings';src:url({{1}}/fonts/glyphicons-halflings-regular.eot);src:url({{1}}/fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'),url({{1}}/fonts/glyphicons-halflings-regular.woff) format('woff'),url({{1}}/fonts/glyphicons-halflings-regular.ttf) format('truetype'),url({{1}}/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg')}") );
+		$fontPath = /*$wgServer .*/ $wgStylePath . '/' . $this->skinname . BOOTSTRAP_DIR;
+		$out->addInlineStyle( str_replace("{{1}}", $fontPath, "@font-face{font-family:'Glyphicons Halflings';src:url({{1}}/fonts/glyphicons-halflings-regular.eot);src:url({{1}}/fonts/glyphicons-halflings-regular.eot?#iefix) format('embedded-opentype'),url({{1}}/fonts/glyphicons-halflings-regular.woff) format('woff'),url({{1}}/fonts/glyphicons-halflings-regular.ttf) format('truetype'),url({{1}}/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular) format('svg')}") );
 	}//end setupSkinUserCss
 }
 
@@ -159,7 +159,7 @@ class Bootstrap3MediaWikiTemplate extends QuickTemplate {
           </form>
 
           <ul class="nav navbar-nav">
-            <?php echo $this->nav( $this->get_page_links( 'Bootstrap:TitleBar' ) ); ?>
+            <?php echo $this->nav( $this->get_page_links( 'MediaWiki:Bootstrap/TitleBar' ) ); ?>
           </ul>
         </div>
       </div><!-- /.container -->
@@ -176,7 +176,9 @@ class Bootstrap3MediaWikiTemplate extends QuickTemplate {
 						<?php
 					}//end if
 				?>
-  				<?php if( $this->data['sitenotice'] ) { ?><div id="siteNotice" class="alert alert-warning"><?php $this->html('sitenotice') ?></div><?php } ?>
+  				<?php if( $this->data['sitenotice'] ): ?>
+  				<div id="siteNotice" class="alert alert-warning"><?php $this->html('sitenotice') ?></div>
+  				<?php endif; ?>
   				<?php if ( $this->data['undelete'] ): ?>
   				<!-- undelete -->
   				<div id="contentSub2"><?php $this->html( 'undelete' ) ?></div>
@@ -217,7 +219,7 @@ class Bootstrap3MediaWikiTemplate extends QuickTemplate {
 		</main>
 		<footer class="footer navbar-default">
 			<div class="container">
-				<?php $this->includePage('Bootstrap:Footer'); ?>
+				<?php $this->includePage('MediaWiki:Bootstrap/Footer'); ?>
 
         <?php if( count($wgFooterIcons) > 0 ) : ?>
         <div class="pull-right">
@@ -496,7 +498,7 @@ class Bootstrap3MediaWikiTemplate extends QuickTemplate {
 	function getPageRawText($title) {
 		$pageTitle = Title::newFromText($title);
 		if(!$pageTitle->exists()) {
-			return 'Create the page [[Bootstrap:TitleBar]]';
+			return 'Create the page [[MediaWiki:Bootstrap/TitleBar]]';
 		} else {
 			$article = new Article($pageTitle);
 			return $article->getRawText();

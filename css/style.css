@@ -209,6 +209,7 @@ a.new {
 	border-top: 1px dotted #eee;
 	margin-top: 2em;
 	padding: 1em 0;
+	font-size: 85%;
 }
 
 #catlinks #mw-normal-catlinks > a {
@@ -495,4 +496,13 @@ pre.linenums ol {
 	.jumbotron pre {
 		display: none;
 	}
+}
+
+/* Infobox */
+div.infobox {
+	margin: 0px 0px 10px 10px;
+}
+div.infobox table.table {
+	margin-bottom: 0px;
+	max-width: 340px;
 }

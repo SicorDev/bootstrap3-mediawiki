@@ -14,8 +14,10 @@ footer .panel, .footer .panel {
 }
 
 blockquote {
-  font-size: 100%;
-  font-style: italic;
+  font-size: 110%;
+  /*font-style: italic;*/
+  font-family: Times New Roman;
+  line-height: 160%;
 }
 
 code {
@@ -25,4 +27,13 @@ code {
     background-color: #222;
     white-space: nowrap;
     border-radius: 2px;
+}
+
+table.info-box {
+  max-width: 360px !important;
+}
+
+.text-muted a {
+  color: #888;
+  font-weight: 600;
 }

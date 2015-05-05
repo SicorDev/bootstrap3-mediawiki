@@ -10,18 +10,25 @@
 
 if ( ! defined( 'MEDIAWIKI' ) ) die( "This is an extension to the MediaWiki package and cannot be run standalone." );
 
-define( 'BOOTSTRAP_DIR', '/bootstrap-3.1.1' );
+#Check $wgVersion for MW version
+if( version_compare( $wgVersion, '1.23', '<=' ) ) {
+	# Use old Bootstrap Version compatible with jQuery < 1.11
+	define( 'BOOTSTRAP_DIR', '/bootstrap-3.1.1' );
+	define( 'BOOTSWATCH_DIR', '/css/bootswatch-3.1.1' );
+} else {
+	define( 'BOOTSTRAP_DIR', '/bootstrap-3.3.4' );
+	define( 'BOOTSWATCH_DIR', '/css/bootswatch-3.3.4' );
+}
 
 $wgExtensionCredits['skin'][] = array(
 	'path'        => __FILE__,
 	'name'        => 'Bootstrap3-Mediawiki',
-	'url'         => 'http://www.jonas-neugebauer.de',
+	'description' => 'MediaWiki skin using Bootstrap 3',
+  'url' 			  => 'http://www.github.com/jneug/bootstrap3-mediawiki',
 	'author'      => array(
-      '[http://www.jonas-neugebauer.de Jonas Neugebauer]',
+      '[http://jonas-neugebauer.de Jonas Neugebauer]',
       '[http://borkweb.com Matthew Batchelder]',
   ),
-	'description' => 'MediaWiki skin using Bootstrap 3',
-  'url' => 'http://www.github.com/jneug/bootstrap3-mediawiki',
 );
 
 $wgValidSkinNames['bootstrap3mediawiki'] = 'Bootstrap3MediaWiki';
@@ -31,19 +38,19 @@ $skinDirParts = explode( DIRECTORY_SEPARATOR, __DIR__ );
 $skinDir = array_pop( $skinDirParts );
 
 if( isset($wgBsTheme) ) {
-  $bsTheme = '/css/bootswatch/' . $wgBsTheme . '.min.css';
+  $bsTheme = BOOTSWATCH_DIR .'/'. $wgBsTheme . '.min.css';
 } else {
   $bsTheme = BOOTSTRAP_DIR . '/css/bootstrap.min.css';
 }
 
 $wgResourceModules['skins.bootstrap3mediawiki'] = array(
 	'styles' => array(
-    $skinDir . $bsTheme                    => array( 'media' => 'all' ),
+		$skinDir . $bsTheme                    => array( 'media' => 'all' ),
 		$skinDir . '/css/style.css'            => array( 'media' => 'all' ),
 	),
 	'scripts' => array(
 		$skinDir . BOOTSTRAP_DIR . '/js/bootstrap.min.js',
-    $skinDir . '/js/behave.js',
+		$skinDir . '/js/behave.js',
 		$skinDir . '/js/behavior.js',
 	),
 	'dependencies' => array(

@@ -11,9 +11,9 @@ $(function() {
 	if( $('#wpTextbox1') ) {
 		// Enable behave.js for wiki editor
 		// (might collide with the new WikiEditor extension in the future)
-		new Behave({
+		/*new Behave({
 				textarea: document.getElementById('wpTextbox1')
-		});
+		});*/
 
 		// Add some styles to the editor elements
 		$('.editButtons').addClass('well');
@@ -27,7 +27,7 @@ $(function() {
 		$(document).scrollTop( $($target).offset().top-100 );
 	});
 
-	$('table')
+	/*$('table')
 		.not('#toc')
 		.not('.mw-specialpages-table')
 		.each(function() {
@@ -43,8 +43,12 @@ $(function() {
 						 .addClass('table-bordered');
 				}//end else
 			}//end if
-		});
+		});*/
 
+	$('.alert a').each(function() {
+		var $el = $(this);
+		$el.addClass('alert-link');
+	});
 
 	// Add labels to checkboxes and radio buttons
 	$('input[type=checkbox],input[type=radio]').each(function() {
